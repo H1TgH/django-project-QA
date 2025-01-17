@@ -1,0 +1,156 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    font-family: 'Jura', sans-serif;
+    background-color: #FEFFF0;
+}
+
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+.nav-open-button {
+    width: 45px;
+    height: 57px;
+    border: none;
+    background-color:#FEFFF0;
+    background-image: url('/static/main/img/burger-nav-icon.svg');
+    background-size: cover;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 22px;
+    margin-left: 23px;
+  }
+  
+.header-inline {
+    display: flex;
+}
+
+.header-logo p:first-child {
+    font-size: 48px;
+    margin: 0;
+    margin-top: 7px;
+    margin-left: 40px;
+}
+
+.header-logo p:last-child {
+    font-size: 16px;
+    margin: 0;
+    margin-left: 40px;
+}
+
+.header-inline p {
+    font-size: 48px;
+    margin: 0px;
+    padding: 0;
+    margin-top: 22px;
+    margin-left: 206px;
+    margin-bottom: 22px;
+}
+
+.main-site-info {
+    border-style: solid;
+    border-radius: 2px;
+    border-left: 0px;
+    border-right: 0px;
+    background-color: #C6C6C6;
+    height: 320px;
+}
+
+.main-site-info-text {
+    margin-top: 35px;
+    margin-left: 100px;
+    font-family: 'poiret one', sans-serif;
+    width: 920px;
+}
+
+.greeting {
+    height: 110px;
+}
+
+.main-site-info-text h2 {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.main-site-info-text p {
+    font-size: 24px;
+    margin: 0;
+}
+
+.proffesion-info {
+    height: 350px;
+}
+
+footer {
+    background-color: #3C4242;
+    height: 100px;
+}
+
+footer p {
+    font-family: 'Jura', sans-serif;
+    font-size: 32px;
+    color: #FFF;
+    margin: 0;
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    left: -500px;
+    width: 232px;
+    height: 100%;
+    background-color: #444;
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.opened {
+    left: 0;
+    background-color: #FEFFF0;
+    width: 232px;
+    height: 100%;
+    margin-top: 2px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: flex;
+    color: black;
+    text-decoration: none;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+
+.first-link {
+    margin-top: 150px;
+}
+
+nav img {
+    width: 24px;
+    height: 24px;
+    margin-top: 3px;
+}
+
+nav p {
+    font-family: 'Jura', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    margin-top: 8px;
+    margin-left: 5px;
+}
