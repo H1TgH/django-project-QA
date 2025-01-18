@@ -15,29 +15,31 @@
     <button class="prev-card">
     
     </button>
+    {% for vacancy in vacancies %}
     <div class="card">
         <div class="card-title">
-            <h2>{{ title }}</h2>
+            <h2>{{ vacancy.title }}</h2>
         </div>
         <div class="card-description">
-            {{ description|safe }}
+            {{ vacancy.description|safe }}
         </div>
         <div class="card-skills">
-            <p>{{ skills }}</p>
+            <p>Ключевые навыки: {{ vacancy.skills }}</p>
         </div>
         <div class="card-employer">
-            <p>{{ employer }}</p>
+            <p>{{ vacancy.employer }}</p>
         </div>
         <div class="card-salary">
-            <p>{{ salary }}</p>
+            <p>{{ vacancy.salary }}</p>
         </div>
         <div class="card-area">
-            <p>{{ area }}</p>
+            <p>{{ vacancy.area }}</p>
         </div>
-        <div class="published-at">
-            <p>{{ published_at }}</p>
+        <div class="card-published-at">
+            <p>Опубликовано: {{ vacancy.published_at }} по московскому времени</p>
         </div>
     </div>
+    {% endfor %}
     <button class="next-card">
 
     </button>

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 import requests
 from datetime import datetime, timedelta
-import re
 
 
 def get_recent_vacancies(profession):
@@ -19,7 +18,7 @@ def get_recent_vacancies(profession):
         vacancies_data = response.json()
         vacancies = []
 
-        for vacancyIndex in range(min(10, len(vacancies_data["items"]))):
+        for vacancyIndex in range(min(1, len(vacancies_data["items"]))):
             vacancy = vacancies_data["items"][vacancyIndex]
             id = vacancy.get('id')
             title = vacancy.get('name', 'Нет данных')
@@ -43,29 +42,31 @@ def get_recent_vacancies(profession):
 
             currency_rate = get_currency_rate(salary_currency)
 
-            if salary.get('from', '') and not salary.get('to'):
+            if salary.get('from') is not None:
                 if currency_rate:
                     salary_string += f'Зарплата от: {salary.get("from") * currency_rate:.2f} руб.'
                 else:
                     salary_string += f'Зарплата от: {salary.get("from")} {salary_currency}'
 
-            if salary.get('to') and salary.get('from', ''):
-                if currency_rate:
-                    salary_string += f' до {salary.get("to") * currency_rate:.2f} руб.'
-                else:
-                    salary_string += f' до {salary.get("to")} {salary_currency}'
+            if salary.get('to') is not None:
+                if salary_string:
+                    salary_string += ' '
+                else: 
+                    salary_string += 'Зарплата до: '
 
-            if salary.get('to') and not salary.get('from', ''):
                 if currency_rate:
-                    salary_string += f'Зарплата до {salary.get("from") * currency_rate:.2f} руб.'
+                    salary_string += f'{salary.get("to") * currency_rate:.2f} руб.'
                 else:
-                    salary_string += f'Зарплата до {salary.get("from")} {salary_currency}'
-            
-            if salary.get('gross', ''):
-                salary_string += f' после вычета налогов'
+                    salary_string += f'{salary.get("to")} {salary_currency}'
+
+            if salary.get('gross', False):
+                salary_string += ' после вычета налогов'
             else:
-                salary_string += f' до вычета налогов'
+                salary_string += ' до вычета налогов'
 
+                time_in_new_format = datetime.strptime(published_at, '%Y-%m-%dT%H:%M:%S%z')
+                published_at = time_in_new_format.strftime('%Y-%m-%d %H:%M:%S')
+            
             vacancies.append({
                 'title': title,
                 'description': description,
@@ -99,5 +100,7 @@ def get_currency_rate(currency_code):
 
 def index(request):
     vacancies = get_recent_vacancies('QA Engineer')
-    reqq = vacancies[0]
-    return render(request, 'vacancies/vacancies.html', reqq)
+    dictionary = {
+        'vacancies': vacancies
+    }
+    return render(request, 'vacancies/vacancies.html', dictionary)
