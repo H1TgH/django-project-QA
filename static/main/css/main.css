@@ -1,5 +1,7 @@
 .main-site-info {
     border: black 1.6px solid;
+    border-left: 0px;
+    border-right: 0px;
     background-color: #C6C6C6;
     height: 320px;
 }
