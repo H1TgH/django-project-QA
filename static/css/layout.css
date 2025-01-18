@@ -18,7 +18,7 @@ header a {
     height: 57px;
     border: none;
     background-color:#FEFFF0;
-    background-image: url('/static/main/img/burger-nav-icon.svg');
+    background-image: url('/static/img/burger-nav-icon.svg');
     background-size: cover;
     cursor: pointer;
     padding: 0;
