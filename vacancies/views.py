@@ -31,12 +31,47 @@ def get_recent_vacancies(profession):
             description = details.get('description', 'Нет данных') if details else 'Нет данных'
             skills = details.get('key_skills', 'Нет данных') if details else 'Нет данных'
 
+            skills_string = ''
+            for skillIndex in range(len(skills)):
+                if skillIndex != len(skills) - 1:
+                    skills_string = skills_string + skills[skillIndex].get('name') + ', '
+                else:
+                    skills_string += skills[skillIndex].get('name')
+
+            salary_string = ''
+            salary_currency = salary.get('currency')
+
+            currency_rate = get_currency_rate(salary_currency)
+
+            if salary.get('from', '') and not salary.get('to'):
+                if currency_rate:
+                    salary_string += f'Зарплата от: {salary.get("from") * currency_rate:.2f} руб.'
+                else:
+                    salary_string += f'Зарплата от: {salary.get("from")} {salary_currency}'
+
+            if salary.get('to') and salary.get('from', ''):
+                if currency_rate:
+                    salary_string += f' до {salary.get("to") * currency_rate:.2f} руб.'
+                else:
+                    salary_string += f' до {salary.get("to")} {salary_currency}'
+
+            if salary.get('to') and not salary.get('from', ''):
+                if currency_rate:
+                    salary_string += f'Зарплата до {salary.get("from") * currency_rate:.2f} руб.'
+                else:
+                    salary_string += f'Зарплата до {salary.get("from")} {salary_currency}'
+            
+            if salary.get('gross', ''):
+                salary_string += f' после вычета налогов'
+            else:
+                salary_string += f' до вычета налогов'
+
             vacancies.append({
                 'title': title,
                 'description': description,
-                'skills': skills,
+                'skills': skills_string,
                 'employer': employer,
-                'salary': salary,
+                'salary': salary_string,
                 'area': area,
                 'published_at': published_at
             })
@@ -50,6 +85,16 @@ def get_vacancy_details(vacancy_id):
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
+    return None
+
+def get_currency_rate(currency_code):
+    url = "https://www.cbr-xml-daily.ru/daily_json.js"
+    response = requests.get(url)
+    data = response.json()
+
+    if currency_code in data['Valute']:
+        rate = data['Valute'][currency_code]['Value']
+        return rate
     return None
 
 def index(request):
