@@ -2,3 +2,66 @@
     color: #eb5959;
     transform: scale(1.05);
 }
+
+.header-inline {
+    border-bottom: black solid 2px;
+}
+
+.vacancies-title-div {
+    height: 68px;
+    width: 100%;
+    background-color:#E4E4E4;
+}
+
+.vacancies-title {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.vacancies-title a {
+    text-decoration: none;
+}
+
+main {
+    height: max-content;
+}
+
+.cards-section {
+    display: flex;
+    width: 100%;
+    background-color:#E4E4E4;
+}
+
+.prev-card, .next-card {
+    background-image: url('/static/vacancies/img/previous-card.svg');
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color:#E4E4E4;
+    background-size: cover;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    margin-top: 260px;
+}
+
+.next-card {
+    background-image: url('/static/vacancies/img/next-card.svg');
+    margin-left: 100px;
+}
+
+.card {
+    margin: 0;
+    padding: 0;
+    margin-left: 100px;
+    margin-bottom: 30px;
+    width: 1155px;
+    background-color: white;
+    border-radius: 20px;
+}

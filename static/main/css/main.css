@@ -1,8 +1,5 @@
 .main-site-info {
-    border-style: solid;
-    border-radius: 2px;
-    border-left: 0px;
-    border-right: 0px;
+    border: black 1.6px solid;
     background-color: #C6C6C6;
     height: 320px;
 }
