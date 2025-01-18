@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>QA Engineer</title>
-    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'layout/css/layout.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Poiret+One&display=swap" rel="stylesheet">
+    {% block links %}
+    {% endblock %}
 </head>
 <body>
     <header>
         <div class="header-inline">
             <button class="nav-open-button"></button>
-            <a class="header-logo" href="#">
+            <a class="header-logo" href="home">
                 <p>QA</p>
                 <p>Engineer</p>
             </a>
@@ -23,44 +25,44 @@
         <nav class="nav-panel">
             <ul>
                 <li>
-                    <a href="" class="first-link">
-                        <img src="{% static 'img/profile-icon.svg' %}">
+                    <a href="{% url 'account' %}" class="first-link">
+                        <img src="{% static 'layout/img/profile-icon.svg' %}">
                         <p>Аккаунт</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'img/statistic-icon.svg' %}">
+                    <a href="{% url 'statistic' %}">
+                        <img src="{% static 'layout/img/statistic-icon.svg' %}">
                         <p>Общая статистика</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'img/demand-icon.svg' %}">
+                    <a href="{% url 'demand' %}">
+                        <img src="{% static 'layout/img/demand-icon.svg' %}">
                         <p>Востребованность</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'img/geography-icon.svg' %}">
+                    <a href="{% url 'geography' %}">
+                        <img src="{% static 'layout/img/geography-icon.svg' %}">
                         <p>География</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'img/skills-icon.svg' %}">
+                    <a href="{% url 'skills' %}">
+                        <img src="{% static 'layout/img/skills-icon.svg' %}">
                         <p>Навыки</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'img/vacancies-icon.svg' %}">
+                    <a href="{% url 'vacancies' %}">
+                        <img src="{% static 'layout/img/vacancies-icon.svg' %}">
                         <p>Последние вакансии</p>
                     </a>
                 </li>
             </ul>
         </nav>
-        <script src="{% static 'js/layout.js' %}"></script>
+        <script src="{% static 'layout/js/layout.js' %}"></script>
 
         {% block greeting %}
 
