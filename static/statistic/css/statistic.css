@@ -1,0 +1,4 @@
+.nav-panel ul li:nth-child(2) a {
+    color: #eb5959;
+    transform: scale(1.05);
+}
