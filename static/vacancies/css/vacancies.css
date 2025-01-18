@@ -32,28 +32,11 @@ main {
 }
 
 .cards-section {
-    display: flex;
     width: 100%;
-    background-color:#E4E4E4;
-}
-
-.prev-card, .next-card {
-    background-image: url('/static/vacancies/img/previous-card.svg');
-    margin: 0;
+    background-color: #E4E4E4;
     padding: 0;
-    border: none;
-    background-color:#E4E4E4;
-    background-size: cover;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    margin-left: 20px;
-    margin-top: 260px;
-}
-
-.next-card {
-    background-image: url('/static/vacancies/img/next-card.svg');
-    margin-left: 100px;
+    margin: 0;
+    overflow: hidden;
 }
 
 .card {
@@ -70,8 +53,8 @@ main {
 
 .card-title h2 {
     margin: 0;
-    margin-top: 30px;
     padding: 0;
+    padding-top: 30px;
     text-align: center;
 }
 
@@ -107,7 +90,10 @@ main {
     line-height: 25px;
 }
 
+.card-published-at p {
+    padding-bottom: 30px;
+}
 
 .card div {
-    margin-bottom: 30px !important;
+    margin-bottom: 30px;
 }

@@ -18,7 +18,7 @@ def get_recent_vacancies(profession):
         vacancies_data = response.json()
         vacancies = []
 
-        for vacancyIndex in range(min(1, len(vacancies_data["items"]))):
+        for vacancyIndex in range(min(5, len(vacancies_data["items"]))):
             vacancy = vacancies_data["items"][vacancyIndex]
             id = vacancy.get('id')
             title = vacancy.get('name', 'Нет данных')
