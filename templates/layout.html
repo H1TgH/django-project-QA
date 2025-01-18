@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>QA Engineer</title>
-    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Poiret+One&display=swap" rel="stylesheet">
 </head>
@@ -24,58 +24,51 @@
             <ul>
                 <li>
                     <a href="" class="first-link">
-                        <img src="{% static 'main/img/profile-icon.svg' %}">
+                        <img src="{% static 'img/profile-icon.svg' %}">
                         <p>Аккаунт</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="{% static 'main/img/statistic-icon.svg' %}">
+                        <img src="{% static 'img/statistic-icon.svg' %}">
                         <p>Общая статистика</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="{% static 'main/img/demand-icon.svg' %}">
+                        <img src="{% static 'img/demand-icon.svg' %}">
                         <p>Востребованность</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="{% static 'main/img/geography-icon.svg' %}">
+                        <img src="{% static 'img/geography-icon.svg' %}">
                         <p>География</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="{% static 'main/img/skills-icon.svg' %}">
+                        <img src="{% static 'img/skills-icon.svg' %}">
                         <p>Навыки</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="{% static 'main/img/vacancies-icon.svg' %}">
+                        <img src="{% static 'img/vacancies-icon.svg' %}">
                         <p>Последние вакансии</p>
                     </a>
                 </li>
             </ul>
         </nav>
-        <script src="{% static 'main/js/scripts.js' %}"></script>
+        <script src="{% static 'js/layout.js' %}"></script>
 
-        <section class="main-site-info">
-            <div class="main-site-info-text">
-                <div class="greeting">
-                    <h2>Добро пожаловать на QA Engineer - сайт, посвященный профессии тестировщика  </h2>
-                </div>
-                <div class="after-greeting">
-                    <p>Сайт создан, чтобы познакомить пользователя с профессией тестировщика. На разных вкладках можно увидеть различную интересную информацию и статистические данные об этой  увлекательной профессии. На данной странице предлагаем вам ознакомиться с тем, что вообще из себя представляет работа тестировщиком</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="proffesion-info">
+        {% block greeting %}
 
-        </section>
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
         <footer>
             <p>Федоров Иван Дмитриевич</p>
             <p>РИ-230936</p>

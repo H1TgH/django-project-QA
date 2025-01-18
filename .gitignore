@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+vacancies_2024.csv
+
 # C extensions
 *.so
 
