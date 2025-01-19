@@ -6,3 +6,6 @@ def show_account_page_w_o_login(request):
 
 def show_account_login_page(request):
     return render(request, 'account/login.html')
+
+def show_account_register_page(request):
+    return render(request, 'account/register.html')

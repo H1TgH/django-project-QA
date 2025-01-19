@@ -1,0 +1,61 @@
+.nav-panel ul li:nth-child(1) a {
+    color: #eb5959;
+    transform: scale(1.05);
+}
+
+.section-account {
+    background-color: #ebebeb;
+    padding-top: 30px;
+    padding-right: 450px;
+    padding-left: 450px;
+    height: 603.9px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.div-register-card {
+    background-color: white;
+    border-radius: 20px;
+    height: 380px;
+    padding-top: 120px;
+}
+
+.section-account h1 {
+    text-align: center;
+    font-size: 36px;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.div-register-card form h2 {
+    font-weight: 400;
+    color: #505050;
+    font-size: 18px;
+    margin: 0;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.div-register-card form input {
+    display: block;
+    height: 30px;
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid #d0d0d0;
+    margin-left: 15%;
+    font-size: 18px;
+    margin-bottom: 60px;
+}
+
+.submit {
+    margin-top: 100px !important;
+    border: none !important;
+    border-radius: 20px !important;
+    background-color: #3e68ff !important;
+    color: white !important;
+    height: 40px !important;
+    font-weight: 600 !important;
+}
+
+.div-register-card form input:focus {
+    outline: none;
+}

@@ -3,11 +3,19 @@
 {% load static %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'account/css/account.css' %}">
+<link rel="stylesheet" href="{% static 'account/css/register.css' %}">
 {% endblock %}
 
 {% block content %}
 <section class="section-account">
-
+    <h1>Создайте свой аккаунт</h1>
+    <div class="div-register-card">
+        <form>
+            {% csrf_token %}
+            <input class="login" name="login" placeholder="Логин (никнейм)">
+            <input class="email" name="email" placeholder="email">
+            <input type="submit" class="submit" name="submit" value="Зарегистрироваться">
+        </form>
+    </div>
 </section>
 {% endblock %}
