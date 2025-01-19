@@ -69,7 +69,6 @@ nav {
     position: absolute;
     left: -500px;
     width: 232px;
-    height: 300px;
     background-color: #444;
     color: white;
     transition: left 0.3s ease;
@@ -80,8 +79,9 @@ nav {
     left: 0;
     background-color: #FEFFF0;
     width: 232px;
-    height: 480px;
-    margin-top: 2px;
+    margin-top: 1px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 nav ul {
