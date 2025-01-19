@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="vacancies-title-div">
-    <h1 class="vacancies-title">5 вакансий за последние 24 часа с <a href="https://hh.ru/">HH.ru</a></h1>
+    <h1 class="vacancies-title"> {{ site_title|safe }}</h1>
 </div>
 <section class="cards-section">
     {% for vacancy in vacancies %}
