@@ -1,14 +1,16 @@
 from django.shortcuts import render
 import requests
 from datetime import datetime, timedelta
+from .models import VacanciesPage
 
 
 def get_recent_vacancies(profession):
+    vacancies_count = VacanciesPage.objects.first().vacancies_count
     url = "https://api.hh.ru/vacancies"
     params = {
         "text": profession,
         "date_from": (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S'),
-        "per_page": 10,
+        "per_page": vacancies_count,
         "order_by": "publication_time",
         "only_with_salary": True,
     }
@@ -18,7 +20,7 @@ def get_recent_vacancies(profession):
         vacancies_data = response.json()
         vacancies = []
 
-        for vacancyIndex in range(min(5, len(vacancies_data["items"]))):
+        for vacancyIndex in range(min(vacancies_count, len(vacancies_data["items"]))):
             vacancy = vacancies_data["items"][vacancyIndex]
             id = vacancy.get('id')
             title = vacancy.get('name', 'Нет данных')

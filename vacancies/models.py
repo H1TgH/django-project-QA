@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class VacanciesPage(models.Model):
+    vacancies_count = models.PositiveSmallIntegerField(verbose_name='Количество вакансий', help_text='Количество вакансий, которое необходимо выводить на странице (не рекомендуется ставить больше 10)')
+    page_title = models.TextField(verbose_name='Заголовок страницы')
