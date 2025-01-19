@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'account/css/account-without-login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section-account">
+    <div class="div-account-card">
+        <h1>Добро пожаловать!</h1>
+        <p>Похоже, что вы не вошли в свой аккаунт.<br>Пожалуйста, сделайте это.</p>
+        <a href="">
+            <button class="login-button">
+                Войти
+            </button>
+        </a>
+        <a href="">
+            <button class="register-button">
+                Регистрация
+            </button>
+        </a>
+    </div>
+</section>
+{% endblock %}

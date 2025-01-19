@@ -1,0 +1,63 @@
+.nav-panel ul li:nth-child(1) a {
+    color: #eb5959;
+    transform: scale(1.05);
+}
+
+.section-account {
+    background-color: #ebebeb;
+    padding-top: 80px;
+    padding-right: 300px;
+    padding-left: 300px;
+    height: 553.9px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.div-account-card {
+    background-color: white;
+    border-radius: 20px;
+    height: 480px;
+}
+
+.div-account-card h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 25px;
+    padding-top: 120px;
+    font-size: 34px;
+}
+
+.div-account-card p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.div-account-card a {
+    text-decoration: none;
+}
+
+.div-account-card button {
+    display: block;
+    width: 42%;
+    height: 8%;
+    margin-left: 29%;
+    border: none;
+    margin-top: 3%;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+}
+
+.login-button {
+    background-color: #3e68ff;
+}
+
+.register-button {
+    background-color: #44d736;
+}
