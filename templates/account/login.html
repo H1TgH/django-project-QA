@@ -10,9 +10,9 @@
 <section class="section-account">
     <h1>С возвращением!</h1>
     <div class="div-register-card">
-        <form method="POST" action="{% url 'verify-code' %}">
+        <form method="POST">
             {% csrf_token %}
-            <input class="email" name="email" placeholder="email">
+            <input class="email" name="email" placeholder="Логин">
             <input class="password" name="password" placeholder="Пароль">
             <input type="submit" class="submit" name="submit" value="Войти">
         </form>
