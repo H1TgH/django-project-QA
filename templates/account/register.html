@@ -10,10 +10,12 @@
 <section class="section-account">
     <h1>Создайте свой аккаунт</h1>
     <div class="div-register-card">
-        <form method="POST" action="{% url 'verify-code' %}">
+        <form method="POST">
             {% csrf_token %}
-            <input class="login" name="login" placeholder="Логин (никнейм)">
+            <input class="login" name="username" placeholder="Логин (никнейм)">
             <input class="email" name="email" placeholder="email">
+            <input class="password" name="password" placeholder="Пароль">
+            <input class="password" name="confirm_password" placeholder="Подтверждение пароля">
             <input type="submit" class="submit" name="submit" value="Зарегистрироваться">
         </form>
     </div>

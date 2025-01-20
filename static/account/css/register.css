@@ -15,8 +15,8 @@
 .div-register-card {
     background-color: white;
     border-radius: 20px;
-    height: 380px;
-    padding-top: 120px;
+    height: 445px;
+    padding-top: 80px;
 }
 
 .section-account h1 {
@@ -24,15 +24,6 @@
     font-size: 36px;
     margin: 0;
     margin-bottom: 20px;
-}
-
-.div-register-card form h2 {
-    font-weight: 400;
-    color: #505050;
-    font-size: 18px;
-    margin: 0;
-    padding-top: 30px;
-    padding-left: 30px;
 }
 
 .div-register-card form input {
@@ -47,7 +38,7 @@
 }
 
 .submit {
-    margin-top: 100px !important;
+    margin-top: 50px !important;
     border: none !important;
     border-radius: 20px !important;
     background-color: #3e68ff !important;

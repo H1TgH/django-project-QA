@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import show_account_page_w_o_login, show_account_login_page, show_account_register_page, show_verify_code_page
+from .views import show_account_page_w_o_login, login, register, verify_code
 
 
 urlpatterns = [
     path('', show_account_page_w_o_login, name='account'),
-    path('login/', show_account_login_page, name='login'),
-    path('verify-code', show_verify_code_page, name='verify-code'),
-    path('register/', show_account_register_page, name='register'),
+    path('login/', login, name='login'),
+    path('verify-code', verify_code, name='verify-code'),
+    path('register/', register, name='register'),
 ]
