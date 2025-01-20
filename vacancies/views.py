@@ -102,7 +102,7 @@ def get_currency_rate(currency_code):
 
 def index(request):
     page_title = VacanciesPage.objects.first().page_title
-    vacancies = get_recent_vacancies('QA Engineer')
+    vacancies = get_recent_vacancies('Тестировщик')
     dictionary = {
         'site_title': page_title,
         'vacancies': vacancies

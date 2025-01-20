@@ -4,8 +4,13 @@ from django.contrib import messages
 
 User = get_user_model()
 
-def show_account_page_w_o_login(request):
-    return render(request, 'account/account-without-login.html')
+def show_account_page(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'account/account-with-login.html', {'user': user})
+    else:
+        return render(request, 'account/account-without-login.html')
+
 
 def register(request):
     if request.method == 'POST':

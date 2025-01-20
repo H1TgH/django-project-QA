@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'account/css/account-with-login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section-account">
+    <h1>Добро пожаловать, {{ user.username }}</h1>
+    <div class="div-account-card">
+        <div class="div-account-field">
+            <h2>Логин: <h2 class="account-user-data">{{ user.username }}</h2></h2>
+        </div>
+        <div class="div-account-field">
+            <h2>Почта: <h2 class="account-user-data">{{ user.email }}</h2></h2>
+        </div>
+        <div class="div-account-field">
+            <h2>Роль: 
+                {% if user.is_staff == False %}
+                    <h2 class="account-user-data">Пользователь</h2>
+                {% endif %}
+                {% if user.is_staff == True and user.is_superuser == False %}
+                    <h2 class="account-user-data">Сотрудник</h2>
+                {% endif %}
+                {% if user.is_superuser == True %}
+                    <h2 class="account-user-data">Админ</h2>
+                {% endif %}
+            </h2>
+        </div>
+        <div class="div-account-field">
+            <h2>Дата регистрации: <h2 class="account-user-data">{{ user.created_at }}</h2></h2>
+        </div>
+        <div class="div-account-field">
+            <h2>Дата последнего обновления: <h2 class="account-user-data">{{ user.updated_at }}</h2></h2>
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
