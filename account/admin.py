@@ -8,12 +8,12 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('granted_by_admin', 'created_at', 'updated_at')}),
     )
 
-    list_display = ['username', 'email', 'is_staff', 'granted_by_admin', 'created_at', 'updated_at']
+    list_display = ['username', 'email', 'is_staff', 'created_at', 'updated_at']
 
-    list_editable = ['is_staff', 'granted_by_admin']
+    list_editable = ['is_staff']
 
     readonly_fields = ['created_at', 'updated_at']
 
-    list_filter = ['is_staff', 'granted_by_admin']
+    list_filter = ['is_staff']
 
 admin.site.register(CustomUser, CustomUserAdmin)
