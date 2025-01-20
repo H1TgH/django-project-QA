@@ -10,7 +10,7 @@
 <section class="section-account">
     <h1>Создайте свой аккаунт</h1>
     <div class="div-register-card">
-        <form>
+        <form method="POST" action="{% url 'verify-code' %}">
             {% csrf_token %}
             <input class="login" name="login" placeholder="Логин (никнейм)">
             <input class="email" name="email" placeholder="email">
