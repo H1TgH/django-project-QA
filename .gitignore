@@ -171,3 +171,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
