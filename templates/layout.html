@@ -23,6 +23,10 @@
     </header>
     <main>
         <nav class="nav-panel">
+            {% if user.is_authenticated %}
+                <p class="welcome-text">Добро пожаловать,</p>
+                <p class="welcome-username">{{ user.username }}!</p>
+            {% endif %}
             <ul>
                 <li>
                     <a href="{% url 'account' %}" class="first-link">
@@ -60,12 +64,14 @@
                         <p>Последние вакансии</p>
                     </a>
                 </li>
+                {% if user.is_staff %}
                 <li>
                     <a href="/admin/">
                         <img src="{% static 'layout/img/admin-panel-icon.svg' %}">
                         <p>Панель администратора</p>
                     </a>
                 </li>
+                {% endif %}
             </ul>
         </nav>
         <script src="{% static 'layout/js/layout.js' %}"></script>
