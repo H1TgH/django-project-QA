@@ -70,15 +70,13 @@ def import_skills_from_json(json_path):
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
-        # Проходим по каждому году
         for year, skills in data.items():
-            if isinstance(skills, list):  # Проверяем, что skills - это список
+            if isinstance(skills, list):
                 for skill_data in skills:
-                    if isinstance(skill_data, list) and len(skill_data) == 2:  # Каждый элемент - подсписок из двух элементов
-                        skill = skill_data[0]  # Навыки в первом элементе подсписка
-                        count = skill_data[1]  # Частота во втором элементе подсписка
+                    if isinstance(skill_data, list) and len(skill_data) == 2:
+                        skill = skill_data[0]
+                        count = skill_data[1]
                         if skill and count is not None:
-                            # Обновление или создание записи в базе данных
                             SkillStatistic.objects.update_or_create(
                                 year=year,
                                 skill=skill,
