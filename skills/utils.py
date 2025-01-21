@@ -3,8 +3,11 @@ import matplotlib.pyplot as plt
 import os
 from collections import Counter
 from django.conf import settings
+import json
+from .models import SkillStatistic
 
-def data_analysis(file_path, profession, is_need_plot):
+
+def data_analysis(file_path, profession, output_json_path, is_need_plot):
     df = pd.read_csv(file_path, quotechar='"', skipinitialspace=True, dtype={'key_skills': str})
 
     df['published_at'] = pd.to_datetime(df['published_at'], errors='coerce', utc=True)
@@ -33,6 +36,9 @@ def data_analysis(file_path, profession, is_need_plot):
 
         if top_skills and is_need_plot:
             save_graph(year, top_skills)
+        
+        with open(output_json_path, 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=4)
 
     return results
 
@@ -59,4 +65,24 @@ def save_graph(year, top_skills):
     plt.savefig(file_path, dpi=300)
     plt.close()
 
+def import_skills_from_json(json_path):
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
 
+        # Проходим по каждому году
+        for year, skills in data.items():
+            if isinstance(skills, list):  # Проверяем, что skills - это список
+                for skill_data in skills:
+                    if isinstance(skill_data, list) and len(skill_data) == 2:  # Каждый элемент - подсписок из двух элементов
+                        skill = skill_data[0]  # Навыки в первом элементе подсписка
+                        count = skill_data[1]  # Частота во втором элементе подсписка
+                        if skill and count is not None:
+                            # Обновление или создание записи в базе данных
+                            SkillStatistic.objects.update_or_create(
+                                year=year,
+                                skill=skill,
+                                defaults={'count': count}
+                            )
+    except Exception as e:
+        print(f"Ошибка при обработке JSON: {e}")

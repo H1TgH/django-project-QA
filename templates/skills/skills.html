@@ -5,3 +5,36 @@
 {% block links %}
 <link rel="stylesheet" href="{% static 'skills/css/skills.css' %}">
 {% endblock %}
+
+{% block content %}
+<section class="statistic-section">
+    <h1 class="statistic-title">ТОП-20 навыков по годам. Наиболее высокочастотные навыки</h1>
+
+    {% for year, stats in statistic.items %}
+        <h2>Год: {{ year }}</h2>
+        <div class="section-statistic-flex">
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Навыки</th>
+                        <th>Частота</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                        <tr>
+                            <td>{{ stat.skill }}</td>
+                            <td>{{ stat.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- График -->
+            <div class="chart-container">
+                <img src="{% get_static_prefix %}skills/img/skills-plot-{{ year }}.png" alt="График по навыкам за {{ year }}">
+            </div>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
