@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import DemandPage
+from .models import DemandPageSalary, DemandPageVacanciesCount
 
 
-class DemandPageAdmin(admin.ModelAdmin):
-    list_display = ('year', 'average_salary', 'vacancies_count')
-    list_filter = ('year'), 
+class DemandPageSalaryAdmin(admin.ModelAdmin):
+    list_display = ('year', 'average_salary')
 
-admin.site.register(DemandPage, DemandPageAdmin)
+
+class DemandPageVacanciesCountAdmin(admin.ModelAdmin):
+    list_display = ('year', 'vacancies_count')
+
+admin.site.register(DemandPageSalary, DemandPageSalaryAdmin)
+admin.site.register(DemandPageVacanciesCount, DemandPageVacanciesCountAdmin)
