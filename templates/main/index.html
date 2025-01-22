@@ -21,10 +21,9 @@
 
 {% block content %}
 <section class="profesion-info">
-<div class="profesion-info-card">
-    <p>
-        {{ profession_info }}
-    </p>
-</div>
+    <div class="profesion-info-card">
+        {{ profession_info|safe }}
+        <img src="{% static profession_info.image_path %}">
+    </div>
 </section>
 {% endblock %}

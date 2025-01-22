@@ -35,7 +35,34 @@
 
 .profesion-info-card {
     background-color: #C6C6C6;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 20px;
+    font-family: "Rubik", serif;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.profesion-info-card h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.profesion-info-card h2 {
+    font-size: 24px;
+    margin-left: 50px;
+}
+
+.profesion-info-card p {
+    font-size: 20px;
     margin-left: 50px;
     margin-right: 50px;
-    border-radius: 20px;
+}
+
+.profesion-info-card img {
+    width: 700px;
+    height: 450px;
+    margin-left: 250px;
 }
