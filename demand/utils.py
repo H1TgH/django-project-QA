@@ -8,6 +8,7 @@ from django.conf import settings
 
 CURRENCY_RATE = {'RUR': 1}
 
+
 def get_currency_rate(currency_code):
     if currency_code not in CURRENCY_RATE:
         url = "https://www.cbr-xml-daily.ru/daily_json.js"
@@ -22,57 +23,77 @@ def get_currency_rate(currency_code):
         return CURRENCY_RATE[currency_code]
 
 
-def csv_reader(file_path):
+def calculate_average_salary(file_path):
     try:
-        data = pd.read_csv(file_path,
-                           parse_dates=['published_at'],
-                           dtype={'key_skills': str},
-                           quotechar='"',
-                           skipinitialspace=True,
-                           utc=True)
+        df = pd.read_csv(file_path,
+                         parse_dates=['published_at'],
+                         dtype={'key_skills': str},
+                         quotechar='"',
+                         skipinitialspace=True,
+                         utc=True)
     except Exception:
-        data = pd.read_csv(file_path,
-                           dtype={'key_skills': str, 'published_at': str},
-                           quotechar='"',
-                           skipinitialspace=True)
+        df = pd.read_csv(file_path,
+                         dtype={'key_skills': str, 'published_at': str},
+                         quotechar='"',
+                         skipinitialspace=True)
 
         try:
-            data['published_at'] = data['published_at'].apply(
+            df['published_at'] = df['published_at'].apply(
                 lambda x: pd.to_datetime(x, utc=True) if pd.notna(x) else pd.NaT
             )
         except Exception:
             return {}
 
-    data = data.dropna(subset=['published_at'])
+    df = df.dropna(subset=['published_at'])
 
-    data = data.dropna(subset=['salary_currency'])
-    data = data.drop(columns=['key_skills'])
-    data = data[data['name'].str.contains('тестировщик', case=False, na=False)]
+    df = df.dropna(subset=['salary_currency'])
+    df = df.drop(columns=['key_skills'])
+    df = df[df['name'].str.contains('тестировщик', case=False, na=False)]
 
-    data['currency_rate'] = data['salary_currency'].apply(get_currency_rate)
-    data['from'] = data['salary_from'] * data['currency_rate']
-    data['to'] = data['salary_to'] * data['currency_rate']
+    df['currency_rate'] = df['salary_currency'].apply(get_currency_rate)
+    df['from'] = df['salary_from'] * df['currency_rate']
+    df['to'] = df['salary_to'] * df['currency_rate']
 
-    data = data.drop(columns=['salary_from', 'salary_to', 'salary_currency'])
+    df = df.drop(columns=['salary_from', 'salary_to', 'salary_currency'])
 
-    data = data[
-        ((data['to'].isna()) | (data['to'] < 10_000_000)) &
-        ((data['from'].isna()) | (data['from'] < 10_000_000))
+    df = df[
+        ((df['to'].isna()) | (df['to'] < 10_000_000)) &
+        ((df['from'].isna()) | (df['from'] < 10_000_000))
         ]
 
     try:
-        data['year'] = data['published_at'].dt.year
+        df['year'] = df['published_at'].dt.year
     except Exception:
         return {}
 
-    salary_by_year = data.groupby('year').agg({
+    salary_by_year = df.groupby('year').agg({
         'from': 'mean',
         'to': 'mean'
     }).assign(avg_salary=lambda x: (x['from'] + x['to']) / 2)['avg_salary'].to_dict()
 
     return salary_by_year
 
-def save_graph(input_file):
+def vacancies_count_by_year(file_path, output_json_path):
+    df = pd.read_csv(file_path, quotechar='"', skipinitialspace=True, dtype={'key_skills': str})
+
+    df = df.dropna(subset=['published_at'])
+
+    df = df[df['name'].str.contains('тестировщик', case=False, na=False)]
+
+    df['published_at'] = pd.to_datetime(df['published_at'], errors='coerce', utc=True)
+
+    df = df.dropna(subset=['published_at'])
+
+    df['year'] = pd.to_datetime(df['published_at']).dt.year
+
+    vacancies_by_year = df.groupby('year').size().to_dict()
+
+    with open(output_json_path, 'w', encoding='utf-8') as f:
+        json.dump(vacancies_by_year, f, ensure_ascii=False, indent=4)
+
+    return vacancies_by_year
+
+def save_salary_graph(input_file):
     with open(input_file, 'r', encoding='utf-8') as f:
         salary_data = json.load(f)
 
@@ -81,11 +102,11 @@ def save_graph(input_file):
 
     plt.figure(figsize=(10, len(salaries) * 0.5))
     plt.bar(years, salaries, color='skyblue')
-    
+
     plt.title('Динамика уровня зарплат тестировщика по годам', fontsize=14)
     plt.xlabel('Год', fontsize=10)
     plt.ylabel('Средняя зарплата (руб.)', fontsize=10)
-    
+
     plt.xticks(fontsize=8)
     plt.yticks(fontsize=8)
 
