@@ -3,7 +3,7 @@ from .models import SkillStatistic
 
 
 class SkillStatisticAdmin(admin.ModelAdmin):
-    list_display = ('year', 'skill', 'count', 'image_path')
+    list_display = ('year', 'skill', 'count')
     search_fields = ('skill',)
     list_filter = ('year',)
 

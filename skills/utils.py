@@ -66,21 +66,18 @@ def save_graph(year, top_skills):
     plt.close()
 
 def import_skills_from_json(json_path):
-    try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+    with open(json_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
 
-        for year, skills in data.items():
-            if isinstance(skills, list):
-                for skill_data in skills:
-                    if isinstance(skill_data, list) and len(skill_data) == 2:
-                        skill = skill_data[0]
-                        count = skill_data[1]
-                        if skill and count is not None:
-                            SkillStatistic.objects.update_or_create(
-                                year=year,
-                                skill=skill,
-                                defaults={'count': count}
-                            )
-    except Exception as e:
-        print(f"Ошибка при обработке JSON: {e}")
+    for year, skills in data.items():
+        if isinstance(skills, list):
+            for skill_data in skills:
+                if isinstance(skill_data, list) and len(skill_data) == 2:
+                    skill = skill_data[0]
+                    count = skill_data[1]
+                    if skill and count is not None:
+                        SkillStatistic.objects.update_or_create(
+                            year=year,
+                            skill=skill,
+                            defaults={'count': count}
+                        )
