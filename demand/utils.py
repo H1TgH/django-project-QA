@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import os
 import json
 from django.conf import settings
+from demand.models import DemandPageSalary
+from demand.models import DemandPageVacanciesCount
 
 
 CURRENCY_RATE = {'RUR': 1}
-
 
 def get_currency_rate(currency_code):
     if currency_code not in CURRENCY_RATE:
@@ -107,14 +108,58 @@ def save_salary_graph(input_file):
     plt.xlabel('Год', fontsize=10)
     plt.ylabel('Средняя зарплата (руб.)', fontsize=10)
 
-    plt.xticks(fontsize=8)
+    plt.xticks(years, fontsize=8)
     plt.yticks(fontsize=8)
 
     plt.tight_layout()
 
     img_dir = os.path.join(settings.BASE_DIR, 'static', 'demand', 'img')
-    os.makedirs(img_dir, exist_ok=True)
     file_path = os.path.join(img_dir, f'avg-salaries.png')
     plt.savefig(file_path, dpi=300)
     plt.close()
 
+def save_vacancies_count_graph(input_file):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        vacancies_count_data = json.load(f)
+
+    years = list(map(int, vacancies_count_data.keys()))
+    vacancies_count = [salary for salary in vacancies_count_data.values()]
+
+    plt.figure(figsize=(10, len(vacancies_count) * 0.5))
+    plt.bar(years, vacancies_count, color='skyblue')
+
+    plt.title('Количество вакансий по годам', fontsize=14)
+    plt.xlabel('Год', fontsize=10)
+    plt.ylabel('Количество вакансий', fontsize=10)
+
+    plt.xticks(years, fontsize=8)
+    plt.yticks(fontsize=8)
+
+    plt.tight_layout()
+
+    img_dir = os.path.join(settings.BASE_DIR, 'static', 'demand', 'img')
+    file_path = os.path.join(img_dir, f'vacancies-count.png')
+    plt.savefig(file_path, dpi=300)
+    plt.close()
+
+def import_average_salary(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    
+    for year, average_salary in data.items():
+        rounded_salary = int(round(average_salary))
+        
+        DemandPageSalary.objects.update_or_create(
+            year=year, 
+            defaults={'average_salary': rounded_salary}
+        )
+
+def import_vacancies_count(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    
+    for year, vacancies_count in data.items():
+        DemandPageVacanciesCount.objects.update_or_create(
+            year=year, 
+            defaults={'vacancies_count': vacancies_count}
+        )
