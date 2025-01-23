@@ -5,3 +5,57 @@
 {% block links %}
 <link rel="stylesheet" href="{% static 'geography/css/geography.css' %}">
 {% endblock %}
+
+{% block content %}
+<section class="statistic-section">
+    <h1 class="statistic-title">Средняя зарплата по городам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city, salary in average_salary_by_city.items %}
+                    <tr>
+                        <td>{{ city }}</td>
+                        <td>{{ salary }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'geography/img/salary_by_city.png' %}" alt="График средних зарплат">
+        </div>
+    </div>
+    
+    <h1 class="statistic-title">Количество вакансий по годам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for year, vacancies_count in vacancies_count.items %}
+                    <tr>
+                        <td>{{ year }}</td>
+                        <td>{{ vacancies_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'demand/img/vacancies-count.png' %}" alt="График средних зарплат">
+        </div>
+    </div>
+</section>
+{% endblock %}

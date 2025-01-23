@@ -46,9 +46,9 @@ def calculate_average_salary(file_path):
             return {}
 
     df = df.dropna(subset=['published_at'])
-
     df = df.dropna(subset=['salary_currency'])
     df = df.drop(columns=['key_skills'])
+    
     df = df[df['name'].str.contains('тестировщик', case=False, na=False)]
 
     df['currency_rate'] = df['salary_currency'].apply(get_currency_rate)
