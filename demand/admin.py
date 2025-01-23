@@ -5,7 +5,6 @@ from .models import DemandPageSalary, DemandPageVacanciesCount
 class DemandPageSalaryAdmin(admin.ModelAdmin):
     list_display = ('year', 'average_salary')
 
-
 class DemandPageVacanciesCountAdmin(admin.ModelAdmin):
     list_display = ('year', 'vacancies_count')
 

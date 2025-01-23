@@ -23,7 +23,6 @@ def get_currency_rate(currency_code):
     else:
         return CURRENCY_RATE[currency_code]
 
-
 def calculate_average_salary(file_path):
     try:
         df = pd.read_csv(file_path,

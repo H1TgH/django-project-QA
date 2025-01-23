@@ -1,4 +1,4 @@
-.nav-panel ul li:nth-child(5) a {
+.nav-panel ul li:nth-child(3) a {
     color: #eb5959;
     transform: scale(1.05);
 }
@@ -36,6 +36,11 @@
 .statistic-title {
     text-align: center;
     font-size: 36px;
+}
+
+.first-title {
+    margin-top: 0;
+    padding-top: 30px;
 }
 
 .statistic-section {
