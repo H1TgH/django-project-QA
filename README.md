@@ -1,1 +1,1 @@
-# django-project-QA
+Сайт о профессии тестировщика (QA-Engineer) на джанго
