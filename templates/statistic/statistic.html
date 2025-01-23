@@ -5,3 +5,135 @@
 {% block links %}
 <link rel="stylesheet" href="{% static 'statistic/css/statistic.css' %}">
 {% endblock %}
+
+{% block content %}
+<section class="statistic-section">
+    <h1 class="statistic-title">Средняя зарплата по годам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for year, salary in average_salary.items %}
+                    <tr>
+                        <td>{{ year }}</td>
+                        <td>{{ salary }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'demand/img/avg-salaries.png' %}" alt="График средних зарплат">
+        </div>
+    </div>
+
+    <h1 class="statistic-title">Количество вакансий по годам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for year, vacancies_count in vacancies_count.items %}
+                    <tr>
+                        <td>{{ year }}</td>
+                        <td>{{ vacancies_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'demand/img/vacancies-count.png' %}" alt="График средних зарплат">
+        </div>
+    </div>
+
+    <h1 class="statistic-title">Средняя зарплата по городам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city, salary in average_salary_by_city.items %}
+                    <tr>
+                        <td>{{ city }}</td>
+                        <td>{{ salary }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'geography/img/salary_by_city.png' %}" alt="График средних зарплат">
+        </div>
+    </div>
+
+    <h1 class="statistic-title">Доля вакансий по городам</h1>
+
+    <div class="section-statistic-flex">
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Средняя зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city, percentage in percentage_by_city.items %}
+                    <tr>
+                        <td>{{ city }}</td>
+                        <td>{{ percentage }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-container">
+            <img src="{% static 'geography/img/percentage_by_city.png' %}" alt="График доли вакансий по городам">
+        </div>
+    </div>
+
+    <h1 class="statistic-title">ТОП-20 навыков по годам. Наиболее высокочастотные навыки</h1>
+
+    {% for year, stats in statistic.items %}
+        <h2>Год: {{ year }}</h2>
+        <div class="section-statistic-flex">
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Навыки</th>
+                        <th>Частота</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                        <tr>
+                            <td>{{ stat.skill }}</td>
+                            <td>{{ stat.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="chart-container">
+                <img src="{% get_static_prefix %}skills/img/skills-plot-{{ year }}.png" alt="График по навыкам за {{ year }}">
+            </div>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
