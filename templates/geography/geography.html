@@ -32,8 +32,8 @@
             <img src="{% static 'geography/img/salary_by_city.png' %}" alt="График средних зарплат">
         </div>
     </div>
-    
-    <h1 class="statistic-title">Количество вакансий по годам</h1>
+
+    <h1 class="statistic-title">Доля вакансий по городам</h1>
 
     <div class="section-statistic-flex">
         <table class="skills-table">
@@ -44,17 +44,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for year, vacancies_count in vacancies_count.items %}
+                {% for city, percentage in percentage_by_city.items %}
                     <tr>
-                        <td>{{ year }}</td>
-                        <td>{{ vacancies_count }}</td>
+                        <td>{{ city }}</td>
+                        <td>{{ percentage }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
         <div class="chart-container">
-            <img src="{% static 'demand/img/vacancies-count.png' %}" alt="График средних зарплат">
+            <img src="{% static 'geography/img/percentage_by_city.png' %}" alt="График доли вакансий по городам">
         </div>
     </div>
 </section>
