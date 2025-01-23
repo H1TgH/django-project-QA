@@ -24,13 +24,6 @@ def calculate_average_salary_by_city(file_path, output_json_path):
                          quotechar='"',
                          skipinitialspace=True)
 
-        try:
-            df['published_at'] = df['published_at'].apply(
-                lambda x: pd.to_datetime(x, utc=True) if pd.notna(x) else pd.NaT
-            )
-        except Exception:
-            return {}
-
     df = df.dropna(subset=['published_at'])
     df = df.dropna(subset=['salary_currency'])
     df = df.drop(columns=['key_skills'])
@@ -47,7 +40,7 @@ def calculate_average_salary_by_city(file_path, output_json_path):
     df = df[
         ((df['to'].isna()) | (df['to'] < 10_000_000)) &
         ((df['from'].isna()) | (df['from'] < 10_000_000))
-        ]
+    ]
 
     salary_by_city = df.groupby('area_name').agg({
         'from': 'mean',
@@ -64,6 +57,8 @@ def calculate_vacancy_percentage_by_city(file_path, output_json_path):
 
     df = df.drop(columns=['published_at'], errors='ignore')
 
+    df = df[df['name'].str.contains('тестировщик', case=False, na=False)]
+
     total_vacancies = len(df)
 
     city_vacancies = df['area_name'].value_counts()
@@ -73,6 +68,7 @@ def calculate_vacancy_percentage_by_city(file_path, output_json_path):
     city_vacancy_percentage = city_vacancy_percentage.to_dict()
 
     result = {city: round(share, 2) for city, share in city_vacancy_percentage.items()}
+    
     with open(output_json_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
         

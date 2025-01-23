@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from .utils import save_salary_by_city_graph, save_vacancies_percentage_by_city_graph, sort_json_salaries, sort_json_percentage, import_salary_by_city, import_percent_by_city
+from .utils import calculate_vacancy_percentage_by_city, save_salary_by_city_graph, save_vacancies_percentage_by_city_graph, sort_json_salaries, sort_json_percentage, import_salary_by_city, import_percent_by_city
 import os
 from django.conf import settings
 from .models import GeographyPageSalary, GeographyPagePercentage
 
 
 def index(request):
+    # calculate_vacancy_percentage_by_city('vacancies_2024.csv', 'percentage_vacancies_by_city.json')
+
     # sort_json_salaries('geography/salary_by_city.json')
     # sort_json_percentage('geography/percentage_vacancies_by_city.json')
 
